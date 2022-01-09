@@ -1,4 +1,4 @@
-def load_db_table(df, conn, table_name, key)
+def load_db_table(df, conn, table_name, key):
     min_key = df[key].min()
     max_key = df[key].max()
     df.to_sql(table_name, conn, if_exists='append', index=False)
