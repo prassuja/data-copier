@@ -9,12 +9,13 @@ def main():
     # use import os
 
     base_dir = 'C:\\Users\\sprasai\\Research\\data\\retail_db_json\\'
-    table_name = 'order_items\\'
+    #table_name = 'order_items\\'
+    table_name = 'departments\\'
     f'{base_dir}{table_name}'
     #os.listdir(f'{base_dir}{table_name}')[0] #returns the first file on the folder
     file_name = os.listdir(f'{base_dir}{table_name}')[0]
 
-    #fp = f'{base_dir}{table_name}{file_name}'
+    fp = f'{base_dir}{table_name}{file_name}'
 
     #print(fp)
 
@@ -41,7 +42,7 @@ def main():
     #for idx, df in enumerate(json_reader):
     #    print(f'Number of records in chunk with index {idx} is {df.shape[0]}')
 
-    query = 'select * from users'
+    query = 'select * from departments'
 
     conn = 'postgresql://retail_user:1Ae2a42c@localhost:5452/retail_db'
 
@@ -49,18 +50,24 @@ def main():
 
     #print(df)
 
-    users_list = [
-        {'user_first_name': 'Scott', 'user_last_name': 'Tiger'},
-        {'user_first_name': 'Donald', 'user_last_name': 'Duck'}
-    ]
+    #users_list = [
+    #    {'user_first_name': 'Scott', 'user_last_name': 'Tiger'},
+    #    {'user_first_name': 'Donald', 'user_last_name': 'Duck'}
+    #]
 
-    df = pd.DataFrame(users_list)
+    #df = pd.DataFrame(users_list)
 
-    df.to_sql('users', conn, if_exists='append', index=False)
+    #df.to_sql('users', conn, if_exists='append', index=False)
+
+    #print(pd.read_sql(query, conn))
+
+    df = pd.read_json(fp, lines=True)
+
+    table_named = 'departments'
+
+    df.to_sql(table_named, conn, if_exists='append', index=False)
 
     print(pd.read_sql(query, conn))
-
-
 
 if __name__ == "__main__":
     main()
