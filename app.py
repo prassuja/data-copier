@@ -45,9 +45,20 @@ def main():
 
     conn = 'postgresql://retail_user:1Ae2a42c@localhost:5452/retail_db'
 
-    df = pd.read_sql(query, conn)
+    #df = pd.read_sql(query, conn)
 
-    print(df)
+    #print(df)
+
+    users_list = [
+        {'user_first_name': 'Scott', 'user_last_name': 'Tiger'},
+        {'user_first_name': 'Donald', 'user_last_name': 'Duck'}
+    ]
+
+    df = pd.DataFrame(users_list)
+
+    df.to_sql('users', conn, if_exists='append', index=False)
+
+    print(pd.read_sql(query, conn))
 
 
 
