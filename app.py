@@ -11,17 +11,17 @@ def main():
     base_dir = 'C:\\Users\\sprasai\\Research\\data\\retail_db_json\\'
     table_name = 'order_items\\'
     f'{base_dir}{table_name}'
-    os.listdir(f'{base_dir}{table_name}')[0] #returns the first file on the folder
+    #os.listdir(f'{base_dir}{table_name}')[0] #returns the first file on the folder
     file_name = os.listdir(f'{base_dir}{table_name}')[0]
 
-    fp = f'{base_dir}{table_name}{file_name}'
+    #fp = f'{base_dir}{table_name}{file_name}'
 
-    print(fp)
+    #print(fp)
 
 
-    df = pd.read_json(fp, lines=True)
+    #df = pd.read_json(fp, lines=True)
 
-    print(df.count())
+    #print(df.count())
     #print(df.describe())
 
     #print(df.dtypes)
@@ -40,6 +40,14 @@ def main():
 
     #for idx, df in enumerate(json_reader):
     #    print(f'Number of records in chunk with index {idx} is {df.shape[0]}')
+
+    query = 'select * from users'
+
+    conn = 'postgresql://retail_user:1Ae2a42c@localhost:5452/retail_db'
+
+    df = pd.read_sql(query, conn)
+
+    print(df)
 
 
 
